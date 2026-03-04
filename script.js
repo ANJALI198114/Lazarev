@@ -183,6 +183,58 @@ function page6Animations() {
     })
 }
 
+function setupModalFunctionality() {
+    // Get modal elements
+    const modal = document.getElementById("signupModal");
+    const closeBtn = document.getElementById("closeModal");
+    const signupBtn = document.querySelector("nav button");
+    const contactForm = document.getElementById("contactForm");
+
+    // Open modal when clicking "Let's Talk" button
+    signupBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+    });
+
+    // Close modal when clicking close button
+    closeBtn.addEventListener("click", function() {
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+    });
+
+    // Close modal when clicking outside of modal-content
+    modal.addEventListener("click", function(e) {
+        if (e.target === modal) {
+            modal.classList.remove("active");
+            document.body.style.overflow = "auto";
+        }
+    });
+
+    // Handle form submission
+    contactForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const company = document.getElementById("company").value;
+
+        // You can add your own logic here (send to server, etc)
+        console.log("Form submitted:", { name, email, company });
+        
+        // Show success message or proceed to next step
+        alert(`Thank you ${name}! We'll contact you at ${email} soon.`);
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Close modal
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+    });
+}
+
 locomotiveAnimation()
 
 navAnimation()
@@ -194,3 +246,5 @@ page3VideoAnimation()
 page6Animations()
 
 loadingAnimation()
+
+setupModalFunctionality()
